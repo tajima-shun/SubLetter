@@ -8,4 +8,4 @@ COPY conf/server.xml /usr/local/tomcat/conf/server.xml
 
 ENV CATALINA_OPTS="-DPORT=${PORT}"
 
-CMD ["catalina.sh", "run"]
+CMD ["/bin/sh", "-c", "export CATALINA_OPTS='-DPORT='\"$PORT\"'' && catalina.sh run"]
