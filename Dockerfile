@@ -1,11 +1,11 @@
-# Java 11 + Tomcat 9
 FROM tomcat:9.0-jdk11-temurin
+# FROM tomcat:9.0-jdk17-temurin  ← EclipseがJava17ならこちらを使用
 
-# 既定アプリ削除（任意）
 RUN rm -rf /usr/local/tomcat/webapps/*
 
-# Eclipseで作ったWARをROOTとして配置（ファイル名は自分のWARに合わせて変更）
 COPY target/Sub-Letter.war /usr/local/tomcat/webapps/ROOT.war
+COPY conf/server.xml /usr/local/tomcat/conf/server.xml
 
-EXPOSE 8080
+ENV CATALINA_OPTS="-DPORT=${PORT}"
+
 CMD ["catalina.sh", "run"]
